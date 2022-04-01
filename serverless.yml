@@ -46,11 +46,11 @@ package:
   exclude:
     - "**"
   include:
-    - wsb-cloud/**
+    - wsb-cloud-2/**
 
 functions:
   getPeople:
-    handler: wsb-cloud/api/people.handler
+    handler: wsb-cloud-2/api/people.handler
     layers:
       - { Ref: PythonRequirementsLambdaLayer }
     environment:
