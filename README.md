@@ -56,7 +56,7 @@ resources: 54
 api keys:
   None
 endpoints:
-  GET - https://9uuax12e89.execute-api.eu-central-1.amazonaws.com/dm/people
+  GET - https://8ijas87ds9.execute-api.eu-central-1.amazonaws.com/dm/people
 functions:
   getPeople wsb-cloud-2-dm-getPeople
 ```
