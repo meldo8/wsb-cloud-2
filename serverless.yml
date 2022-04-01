@@ -1,0 +1,97 @@
+service: wsb-cloud-2
+useDotenv: true
+frameworkVersion: ^3.10.2
+
+provider:
+  name: aws
+  runtime: python3.9
+  stage: dev
+  region: eu-central-1
+  tracing:
+    apiGateway: true
+    lambda: true
+  apiGateway:
+    shouldStartNameWithService: true
+    minimumCompressionSize: 1024
+  environment:
+    LOGGING_LEVEL: ${env:LOGGING_LEVEL, "INFO"}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - xray:PutTraceSegments
+        - xray:PutTelemetryRecords
+      Resource: "*"
+    - Effect: 'Allow'
+      Action:
+        - 'dynamodb:Query'
+      Resource:
+        - Fn::Join:
+            - ""
+            - - Fn::GetAtt: ["peopleTable", "Arn"]
+              - "/index/label-index"
+    - Effect: 'Allow'
+      Action:
+        - 'dynamodb:BatchWriteItem'
+        - 'dynamodb:Scan'
+        - 'dynamodb:GetItem'
+        - 'dynamodb:PutItem'
+        - 'dynamodb:UpdateItem'
+      Resource:
+        Fn::GetAtt:
+          - peopleTable
+          - Arn
+
+package:
+  exclude:
+    - "**"
+  include:
+    - wsb-cloud/**
+
+functions:
+  getPeople:
+    handler: wsb-cloud/api/people.handler
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    environment:
+      PEOPLE_TABLE_NAME:
+        Ref: peopleTable
+    events:
+      - http:
+          path: people
+          method: GET
+          cors: true
+
+plugins:
+  - serverless-python-requirements
+  - serverless-manifest-plugin
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    usePoetry: false
+    slim: true
+    layer: true
+
+resources:
+  Resources:
+    peopleTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
+          - AttributeName: surname
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: surname-index
+            KeySchema:
+              - AttributeName: surname
+                KeyType: HASH
+            Projection:
+              ProjectionType: INCLUDE

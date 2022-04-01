@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+aws-xray-sdk = "2.9.0"
+requests = "2.27.1"
+
+[dev-packages]
+boto3 = "*"
+pytest = "*"
+jsonschema = "*"
+black = "*"
+mypy = "*"
+flake8 = "*"
+pre-commit = "*"
+flake8-print = "*"
+pytest-mock = "*"
+
+[requires]
+python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
