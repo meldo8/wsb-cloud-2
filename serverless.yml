@@ -7,6 +7,7 @@ provider:
   runtime: python3.9
   stage: dev
   region: eu-central-1
+  profile: radar
   tracing:
     apiGateway: true
     lambda: true
@@ -32,20 +33,16 @@ provider:
               - "/index/label-index"
     - Effect: 'Allow'
       Action:
-        - 'dynamodb:BatchWriteItem'
         - 'dynamodb:Scan'
         - 'dynamodb:GetItem'
-        - 'dynamodb:PutItem'
-        - 'dynamodb:UpdateItem'
       Resource:
         Fn::GetAtt:
           - peopleTable
           - Arn
 
 package:
-  exclude:
-    - "**"
-  include:
+  patterns:
+    - "!**"
     - wsb-cloud-2/**
 
 functions:
@@ -80,8 +77,6 @@ resources:
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
-            AttributeType: S
-          - AttributeName: name
             AttributeType: S
           - AttributeName: surname
             AttributeType: S

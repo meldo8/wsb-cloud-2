@@ -18,14 +18,14 @@ Technology used:
 
 ### Invoke functions
 
-- Get people `make invoke`
+- Get people `make invoke name=<name of created stage>`
 
 ## Tracing
 
 AWS X-Ray is used for tracing calls within ApiGateway and Lambda.
 Tracing allows us to view how applications is behaving with metrics regarding Lambda calls, DynamoDB operations.
 
-## Logging
+## Logging & Monitoring
 
 CloudWatch is a monitoring and observability service.
 CloudWatch provides data and actionable insights to monitor applications (Lambda, API Gateway and DynamoDB),
