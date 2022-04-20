@@ -1,4 +1,4 @@
-# wsb-cloud-2
+# Final project of the cloud subject
 
 ### Intro
 
