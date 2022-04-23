@@ -43,11 +43,11 @@ provider:
 package:
   patterns:
     - "!**"
-    - wsb-cloud-2/**
+    - app/**
 
 functions:
   getPeople:
-    handler: wsb-cloud-2/api/people.handler
+    handler: app/people.handler
     layers:
       - { Ref: PythonRequirementsLambdaLayer }
     environment:
@@ -64,6 +64,7 @@ plugins:
   - serverless-manifest-plugin
 custom:
   pythonRequirements:
+    dockerImage: mlupin/docker-lambda:python3.9-build
     dockerizePip: non-linux
     usePoetry: false
     slim: true
@@ -89,4 +90,4 @@ resources:
               - AttributeName: surname
                 KeyType: HASH
             Projection:
-              ProjectionType: INCLUDE
+              ProjectionType: KEYS_ONLY

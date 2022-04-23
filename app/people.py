@@ -21,7 +21,7 @@ def handler(event, context):
 
     scan_results = table.scan(
         FilterExpression=only_people_filter,
-        ProjectionExpression="id,#n,tags,#s,stage",
+        ProjectionExpression="id,#n,#s",
         ExpressionAttributeNames={"#n": "name", "#s": "surname"},
     )
 
