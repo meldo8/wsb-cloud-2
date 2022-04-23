@@ -1,4 +1,4 @@
-# wsb-cloud-2
+# 🌩 Final project CloudYApp 🌩
 
 ### Intro
 
@@ -20,12 +20,12 @@ Technology used:
 
 - Get people `make invoke name=<name of created stage>`
 
-## Tracing
+## 🔎 Tracing 🔍
 
 AWS X-Ray is used for tracing calls within ApiGateway and Lambda.
 Tracing allows us to view how applications is behaving with metrics regarding Lambda calls, DynamoDB operations.
 
-## Logging & Monitoring
+## 📃 Logging & Monitoring 🎥
 
 CloudWatch is a monitoring and observability service.
 CloudWatch provides data and actionable insights to monitor applications (Lambda, API Gateway and DynamoDB),
@@ -61,7 +61,7 @@ functions:
   getPeople wsb-cloud-2-dm-getPeople
 ```
 
-Please remove your code after you are done by running.
+❗❗ Please remove your code after you are done by running ❗❗
 
 ```bash
 make remove-stage name=test_name
