@@ -1,3 +1,4 @@
+
 # 🌩 Final project CloudYApp 🌩
 
 ### Intro
@@ -28,11 +29,12 @@ Tracing allows us to view how applications is behaving with metrics regarding La
 ## 📃 Logging & Monitoring 🎥
 
 CloudWatch is a monitoring and observability service.
-CloudWatch provides data and actionable insights to monitor applications (Lambda, API Gateway and DynamoDB),
-respond to system-wide performance changes, and optimize resource utilization. CloudWatch collects monitoring and operational data in the form of logs, metrics, and events.
+CloudWatch provides data and actionable insights to monitor applications (Lambda, API Gateway and DynamoDB) and help you optimize performance, manage resource utilization, and understand system-wide operational health. CloudWatch collects monitoring and operational data in the form of logs, metrics, and events it also collects, aggregates, and summarizes compute utilization information such as CPU, memory, disk, and network data.
+
+You can use AWS Systems Manager to install a CloudWatch Agent, or you can use the PutLogData API action to easily publish logs.
 
 
-### Deployment
+### 🚀Deployment 🚀
 
 Code will be deployed to `name` stage in Gateway API.
 This way you can test your code in the cloud.
